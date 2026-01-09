@@ -1,88 +1,3 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Message Card</title>
-
-<style>
-body{
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family: system-ui, sans-serif;
-  background: linear-gradient(135deg,#0b1020,#121a33);
-  color:#fff;
-}
-
-.card{
-  width:90%;
-  max-width:420px;
-  background:rgba(15,23,42,.85);
-  border-radius:20px;
-  padding:22px;
-  text-align:center;
-  box-shadow:0 20px 50px rgba(0,0,0,.5);
-}
-
-.envelope{
-  height:200px;
-  border:1px solid rgba(255,255,255,.2);
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  margin-bottom:15px;
-}
-
-.opened{
-  background:rgba(255,255,255,.05);
-}
-
-button{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:14px;
-  background:#60a5fa;
-  color:#000;
-  font-weight:600;
-  cursor:pointer;
-}
-
-.hidden{display:none;}
-
-.msg{
-  line-height:1.7;
-  font-size:16px;
-}
-
-.signature{
-  margin-top:14px;
-  font-size:13px;
-  color:#a78bfa;
-  font-style:italic;
-}
-</style>
-</head>
-
-<body>
-
-<div class="card">
-  <div id="env" class="envelope">
-    <div id="envText">Tap to open envelope 💌</div>
-  </div>
-
-  <button id="unlock" class="hidden">Hold to unlock 🔓</button>
-
-  <div id="final" class="hidden">
-    <div class="msg" id="type"></div>
-  </div>
-</div>
-
 <script>
 const env=document.getElementById("env");
 const unlock=document.getElementById("unlock");
@@ -125,6 +40,7 @@ function reveal(){
  typeText();
 }
 
+/* Structured message */
 const message=[
 "<b>I Love You 💖</b>",
 "",
@@ -134,24 +50,17 @@ const message=[
 "<span class='signature'>From Mr. Hafeez.</span>"
 ];
 
-let i=0,j=0;
+let index=0;
 
 function typeText(){
  type.innerHTML="";
- i=0; j=0;
+ index=0;
+
  const t=setInterval(()=>{
-  if(j<message.length){
-    if(i<message[j].length){
-      type.innerHTML+=message[j][i];
-      i++;
-    }else{
-      type.innerHTML+="<br>";
-      j++; i=0;
-    }
+  if(index<message.length){
+    type.innerHTML+=message[index]+"<br>";
+    index++;
   }else clearInterval(t);
- },25);
+ },350);
 }
 </script>
-
-</body>
-</html>
